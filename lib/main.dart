@@ -4,9 +4,7 @@ import 'package:land_slade_guardian/firebase_options.dart';
 import 'package:land_slade_guardian/pages/login.dart';
 
 Future<void> main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home:  LoginPage(),
+      home: LoginPage(),
     );
   }
 }

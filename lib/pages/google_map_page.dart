@@ -1,31 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart'; // Import from latlong2
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
   @override
-  State<MapScreen> createState() => MapScreenState();
+  State<MapScreen> createState() => _MapScreenState();
 }
 
-class MapScreenState extends State<MapScreen> {
-  GoogleMapController? _mapController;
-
+class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        myLocationButtonEnabled: true,
-        myLocationEnabled: true,
-        mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(10, 70), // Example coordinates
-          zoom: 14,
+      appBar: AppBar(title: const Text("Flutter Map Example")),
+      body: content(),
+    );
+  }
+
+  Widget content() {
+    return FlutterMap(
+      options: MapOptions(
+        initialCenter: LatLng(1.2878, 103.8666), // Correct LatLng
+        initialZoom: 11,
+        interactionOptions: const InteractionOptions(
+          flags: ~InteractiveFlag.doubleTapZoom,
         ),
-        onMapCreated: (GoogleMapController controller) {
-          _mapController = controller;
-        },
       ),
+      children: [
+        openStreetMapTileLayer(), // Call as function
+      ],
+    );
+  }
+
+  TileLayer openStreetMapTileLayer() {
+    return TileLayer(
+      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     );
   }
 }

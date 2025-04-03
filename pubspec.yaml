@@ -38,6 +38,9 @@ dependencies:
   dio:
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.0
+  open_street_map_search_and_pick: ^0.1.1
+  flutter_map: ^6.2.1
+  latlong2: ^0.9.1
 
 
 dev_dependencies:

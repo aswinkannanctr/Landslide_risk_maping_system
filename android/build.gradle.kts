@@ -1,3 +1,4 @@
+
 allprojects {
     repositories {
         google()
@@ -12,6 +13,7 @@ subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
@@ -19,3 +21,12 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+// ✅ Enforce Correct NDK Version
+//gradle.projectsEvaluated {
+    allprojects {
+        extensions.findByType<com.android.build.gradle.BaseExtension>()?.apply {
+            ndkVersion = "27.0.12077973" // Make sure this matches your installed NDK version
+        }
+    }
+//}
